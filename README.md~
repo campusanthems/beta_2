@@ -1,0 +1,66 @@
+# Campus Antehms Beta
+
+# Structure
+
+Objects
+
+-> School
+
+	name
+	total_votes
+
+	-> User
+
+		name
+		total_votes
+
+		-> Band
+
+			user_id
+			band_id
+			username
+			permalink_url
+			avatar_url
+			country
+			full_name
+			city
+			description
+			website
+			website-title
+			track_count
+
+			-> Comments
+
+				parent_id
+				comment_id
+				created_at
+				body
+
+
+			-> Track
+
+				votes
+				track_id
+				created_at
+				band_id
+				title
+				permalink_url
+				artwork_url
+				description
+				duration
+				genre
+				release
+				release_day
+				release_month
+				release_year
+				streamable
+				waveform_url
+				stream_url
+				bpm
+				comment_count
+				key_signature
+				playback_count
+
+				-> Comments
+
+				... Same as above ...

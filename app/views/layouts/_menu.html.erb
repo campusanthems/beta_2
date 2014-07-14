@@ -1,0 +1,81 @@
+<nav class="navbar navbar-default" role="navigation">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <%= link_to root_path, :class => "navbar-brand" do %> 
+      <%= image_tag("CampusAnthemsLogoSmall.png", :alt => "logo", :height => "100%;") %>
+      <% end %>
+    </div>
+
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      </form>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Schools</a>
+            <ul class="dropdown-menu scrollable-menu">
+              <%= render :partial => 'layouts/school_list' %>
+            </ul>
+          </li>
+          
+
+          <% if signed_in? %>
+          <li id="fat-menu" class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              Account<b class="caret"></b>
+            </a>
+            <ul class="dropdown-menu">
+              <li><%= link_to "Profile", current_user %></li>
+              <li><%= link_to "Settings", edit_user_path(current_user) %></li>
+              <li class="divider"></li>
+              <li>
+                <%= link_to "Sign out", signout_path, method: "delete" %>
+              </li>
+            </ul>
+          </li>
+          <% else %>
+          <!-- <ul class="nav pull-right"> -->
+          <li class="dropdown">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">Login</a>
+            <ul class="dropdown-menu" role="menu" style="padding: 10px;">
+              <%= form_for(:session, url: sessions_path) do |f| %>
+
+              <h5>
+                <%= f.label :email %>
+                <%= f.text_field :email %>
+              </h5>
+
+              <h5>
+                <%= f.label :password %>
+                <%= f.password_field :password %>
+              </h5>
+
+              <h5>
+                <%= f.submit "Sign in", class: "btn btn-large btn-primary" %>
+              </h5>
+
+              <!-- <h3 class="text-center"><small >New user? <%= link_to "Sign up now!", signup_path %></small></h3> -->
+
+              <% end %>
+            </ul>
+          </li>
+          
+          <li>
+          <%= link_to "Artist Sign-Up", signup_path%>
+          </li>
+          <% end %>
+          </ul>
+        </li>
+      </ul>
+    </div><!-- /.navbar-collapse -->
+  </div><!-- /.container-fluid -->
+</nav>
+<div>
+<%= image_tag("color_bar.png", :style => "width: 25%; margin-top: -10px; float: left;") %>
+<%= image_tag("color_bar.png", :style => "width: 25%; margin-top: -10px; float: left;") %>
+<%= image_tag("color_bar.png", :style => "width: 25%; margin-top: -10px; float: left;") %>
+</div>

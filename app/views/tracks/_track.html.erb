@@ -1,0 +1,22 @@
+
+
+<li class="list-group-item top-track-container">
+	<%= link_to :controller => "tracks", :action => "vote_up", :id => track.id, :remote => true do %>
+	<span class="glyphicon glyphicon-arrow-up" style="float: right; margin-top: 5px; margin-right: 10px;"> <br /> <h6 style="margin-left: 2px; margin-right: 0px; margin-top: 0px; margin-bottom: 0px; text-align: center;"><%= track.votes %></h6></span>
+	<% end %>
+	<%= link_to :action => 'select_track', :track_id => track.id, :genre => genre, :user_id => user_id, :band_id => band_id, :school_id => school_id, remote: true do %>
+	<h5 class="pull-left" style="margin-left: 5px; margin-right: 10px; margin-top: 10px; font-size: 18px;"><%= rank %></h5>
+	<%= image_tag(track.band.avatar_url, :alt => track.band.username, :height  => "32px;", :width => "32px;", :style => "margin-top: 4px;", :class => "pull-left") %>
+
+	<div style="height: 41px;">
+	<div style="height: 20px;">
+	<h6 class="pull-left" style="margin-top: 5px; margin-bottom: 0px; margin-left: 5px;"><small><%= track.title %></small></h6>
+	</div>
+	<div style="height: 20px;">
+	<h6 class="pull-left" style="margin:0px; margin-left: 5px;" ><%= track.band.username %></h6>
+	</div>
+
+	</div>	
+	<% end %>
+
+</li>

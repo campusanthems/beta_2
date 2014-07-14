@@ -1,0 +1,3 @@
+<% School.all.each do |school| %>
+<li><%= link_to school.name, school_path(school.id) %></li>
+<% end %>

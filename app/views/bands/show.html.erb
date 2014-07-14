@@ -1,0 +1,54 @@
+<% provide(:title, @band.username) %>
+<% provide(:header, @band.user.school.name) %>
+
+<div class="container" style="border-left: 124px; border-right: 124px;">
+<div class="row">
+  <div style="float:left; width: 23%; margin-right: 40px;">
+    <h6 style="margin-bottom: 0px;"><small><b>GENRE</b> songs</small></h6> 
+    <div class="panel panel-default" >
+        <ul class="list-group" >
+          <% @tracks.each_with_index do |track, index| %>
+            <%= render partial: track, locals: {rank: index + 1, :genre => nil, :user_id => nil, :band_id => @band.id, :school_id => nil} %> 
+          <% end %>
+        </ul>
+      </div> 
+      </div>
+
+      
+      <div style="float:left;">
+      <h6 style="margin-bottom: 0px;"><small>artist details</small></h6> 
+      </div>
+
+      <div class="panel panel-default" style="float: right; width: 73.5%; min-height: 250px;">
+        <div class="panel-heading" style="height: 60px;">
+
+        <h2 class="panel-title text-center" style="margin-top: 10px;">
+          <b><%= @band.username %></b>
+          </h2>
+          <%= image_tag(@band.avatar_url.sub!('large','t300x300'), :alt => @band.username, :height => "200px;", :width => "200px;") %>
+        </div>
+        <div class="panel-body">
+        <div style="margin-left: 210px;">
+        <h5 ><b >Band Members:</b> <%= @band.band_members %></h5>
+        <h5 ><b >Hometown:</b> <%= @band.city %></h5>
+        <h5 ><b >Class Year(s):</b> <%= @band.class_years %></h5>
+        <h5 ><b >Genre(s):</b> 
+
+        <% track_list = []  %>
+        <% @band.tracks.each do |track| %> 
+        <% track_list << track.genre %> 
+        <% end %>  
+        <% track_list.uniq.each  do |genre| %>
+        <%= genre %>
+        <% end %></h5> 
+        <h5 >Total Votes: <%= @band.total_votes %> </h5>
+        </div>
+
+        <h6 style="margin-top: 50px;"> <%= @band.description %></h6>
+      </div>
+</div>
+
+</div>
+</div>
+<%= render 'layouts/footer' %>
+<%= debug(params) if Rails.env.development? %>

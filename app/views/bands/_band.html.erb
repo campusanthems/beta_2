@@ -1,0 +1,29 @@
+
+<div style="float: left; margin-left: 40px; margin-top: 22px; margin-bottom: 20px; width: 162px;">
+<%= link_to band do %>
+<%= image_tag(band.avatar_url, :alt => band.username, :height => "162px;", :width => "162px;") %>
+<% end %>
+<br />
+
+
+<div style="float: left; font-size: 11px;"><b><%= rank %></b> </div>
+<div style="float: left; font-size: 11px; margin-left: 10px; margin-top: 5px;"><%= band.username %></div>
+<div style="float: left; font-size: 11px; margin-left: 10px;width: inherit;">
+<% arr = [] %>
+<% band.tracks.each do |track| %>
+<% arr << track.genre %>
+<% end %>
+
+<div style="margin-left: 5px; margin-bottom: 5px; margin-top: 5px;">
+<% arr.uniq.each do |genre| %>
+	<span class="label label-default" style="font-size: 11px; border-bottom: 20px;"><%= genre %></span>
+<% end %>
+</div>
+
+</div>
+<div style="float:left; font-size: 11px; margin-left: 15px;">
+<%= band.user.school.name %>
+</div>
+</div>
+
+

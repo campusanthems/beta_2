@@ -1,0 +1,17 @@
+<% @band = Band.find(id) %>
+
+<div class="dropdown pull-right">
+  <button class="btn btn-default dropdown-toggle btn-xs" type="button" id="edit_class_years" data-toggle="dropdown">
+    edit
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="edit_class_years">
+    <%= form_for @band do |f| %>
+    <%= f.label :class_years %>
+    <%= f.text_field :class_years %>
+    <%= f.submit 'Update'%>
+    <% end %>
+  </ul>
+</div>
+
+

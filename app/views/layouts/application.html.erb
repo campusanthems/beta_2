@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Campus Anthems</title>
+  <link href='http://fonts.googleapis.com/css?family=Lato:400,300italic' rel='stylesheet' type='text/css'>
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag "application", media: "all",
+  "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+<!--[if lt IE 9]>
+<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+<![endif]-->
+</head>
+<body style="background-color: <%= yield(:background_color) %>;">
+  <div id="Layout">
+
+    <div id="TrackPlayer">
+      <%= render 'layouts/track_player' %>
+    </div>
+    <div id="Menu">
+      <%= render 'layouts/menu' %>
+    </div>
+
+    <div id="Content">
+      <%= render 'layouts/content' %>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

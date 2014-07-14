@@ -1,0 +1,7 @@
+<% flash.each do |key, value| %>
+<%= content_tag(:div, value, class: "alert alert-#{key}") %>
+<% end %>  
+<div id="FlashNotice"><%= flash[:notice] %></div>
+<div id="FlashError"><%= flash[:error] %></div>
+<div id="FlashAlert"><%= flash[:alert] %></div>
+<%= yield %>

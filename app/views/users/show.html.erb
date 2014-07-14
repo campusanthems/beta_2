@@ -1,0 +1,82 @@
+<%= render 'layouts/header', :header => @user.name.possessive << " Page" %> 
+<% provide(:background_color, @user.school.background_color) %>
+<button class="btn btn-primary btn-lg" style="float:right;" data-toggle="modal" data-target="#myModal1">
+  Add a band
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title" id="myModalLabel">Band Signup</h4>
+      </div>
+      <div class="modal-body">
+        <h4 class="text-center"><%= link_to image_tag("soundcloud_connect.png") , soundcloud_connect_path, :class => "connect" %></h4>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container" style="border-left: 124px; border-right: 124px;">
+
+<% @user.bands.each do | band | %>
+<div class="row">
+  <div style="float:left; width: 23%; margin-right: 40px;">
+    <h4 style="margin-bottom: 0px;"><small><i>songs</i></small></h4> 
+    <div class="panel panel-default" >
+        <ul class="list-group" >
+          <% band.tracks.sort_by { |track| -track.votes }.each_with_index do |track, index| %>
+            <%= render partial: track, locals: {rank: index + 1, :genre => nil, :user_id => @user.id, :band_id => nil, :school_id => nil} %> 
+          <% end %>
+        </ul>
+      </div> 
+      </div>
+
+      
+      <div style="float:left;">
+      <h4 style="margin-bottom: 0px;"><small><i>artist details</i></small></h4> 
+      </div>
+
+      <div class="panel panel-default" style="float: right; width: 73.5%; min-height: 250px;">
+        <div class="panel-heading" style="height: 60px;">
+
+        <h2 class="panel-title text-center" style="margin-top: 10px;">
+          <b><%= band.username %></b>
+          </h2>
+          <%= image_tag(band.avatar_url.sub!('large','t300x300'), :alt => band.username, :height => "200px;", :width => "200px;") %>
+        </div>
+        <div class="panel-body">
+        <div style="margin-left: 210px;">
+        <h5 ><b >Band Members:</b> <%= band.band_members %> <%= render 'forms/edit_band_members', :id => band.id%> </h5>
+        <h5 ><b >Hometown:</b> <%= band.city %></h5>
+        <h5 ><b >Class Year(s):</b> <%= band.class_years %> <%= render 'forms/edit_class_years', :id => band.id %></h5>
+        <h5 ><b >Genre(s):</b> 
+
+        <% track_list = []  %>
+        <% band.tracks.each do |track| %> 
+        <% track_list << track.genre %> 
+        <% end %>  
+        <% track_list.uniq.each  do |genre| %>
+        <%= genre %>
+        <% end %></h5> 
+        <h5 >Total Votes: <%= band.total_votes %> </h5>
+        </div>
+
+        <h6 style="margin-top: 50px;"> <%= band.description %> <%= render 'forms/edit_description', :id => band.id %></h6>
+
+      </div>
+</div>
+</div>
+<% end %>
+
+
+</div>
+<%= render 'layouts/footer' %>
+<%= debug(params) if Rails.env.development? %>
+

@@ -1,0 +1,55 @@
+<div class="container" style="border-left: 124px; border-right: 124px;">
+<% if @user.errors.any? %>
+<div class="panel panel-danger">
+<div class="panel-heading">
+<h5 class="panel-title text-center">The form contains <%= pluralize(@user.errors.count, "error") %></h5>
+</div>
+<div class="panel-body">
+<% @user.errors.full_messages.each do |msg| %>
+      <h6>* <%= msg %></h6>
+    <% end %>
+    </div>
+
+</div>
+<% end %>
+
+<div class="panel panel-default">
+<h2 style="margin-left: 50px;">Artist Signup</h2>
+<%= image_tag("Schools_us.png", :style => "float:right; margin-top: 60px; margin-right: 20px;") %>
+<%= form_for(@user, :html => {:class => "panel-body"}) do |f| %>
+
+
+      <h3 style="margin-bottom: 0px;"><small><%= f.label :name%>:</small></h3>
+       <div class="input-group input-group-lg">
+      <%= f.text_field :name%>
+      </div>
+
+      <h3 style="margin-bottom: 0px;"><small><%= f.label :email%>:</small></h3>
+      <div class="input-group input-group-lg">
+      <%= f.text_field :email %>
+      </div>
+
+      
+      <h3 style="margin-bottom: 0px;"><small><%= f.label :password%>:</small></h3>
+      <div class="input-group input-group-lg">
+      <%= f.password_field :password%>
+      </div>
+
+      <h3 style="margin-bottom: 0px;"><small><%= f.label :password_confirmation, "Confirmation Password"%>:</small></h3>
+      <div class="input-group input-group-lg">
+      <%= f.password_field :password_confirmation%>
+      </div>
+
+      <h3 style="margin-bottom: 0px;">
+      <small><%= f.label :school_id, "School" %>:</small>
+      </h3>
+      <div class="input-group input-group-lg" style="margin-bottom: 10px;">
+      <%= f.collection_select(:school_id, School.all, :id, :name, {:prompt=>true}) %>
+      </div>
+
+      <div class="control">
+      <%= f.submit "Create my account", class: "btn btn-small btn-info" %>
+      </div>
+<% end %>
+</div>
+</div>

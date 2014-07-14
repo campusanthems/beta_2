@@ -1,0 +1,3 @@
+<% Band.all.each do |band| %>
+<li><%= link_to band.username, band_path(band.id) %>
+<% end %>

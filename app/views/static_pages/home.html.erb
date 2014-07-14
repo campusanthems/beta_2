@@ -1,0 +1,38 @@
+<%= render :partial => 'layouts/header', :locals => {:header => "Font Page"} %>
+<%= render :partial => 'layouts/genre_selector', :locals => {:school_id => nil} %> 
+
+
+<div class="container" style="border-left: 124px; border-right: 124px;">
+<div class="row">
+  <div style="float:left; min-width: 269px; min-height: 163px; width:23%; margin-right: 40px;">
+  	<% if @genre == nil %>
+  	<h6 style="margin-bottom: 0px;"><small>Top songs</small></h6> 
+  	<% else %>
+    <h6 style="margin-bottom: 0px;"><small>Top <b><%= @genre %></b> songs</small></h6> 
+    <% end %>
+    <div class="panel panel-default" >
+        <ul class="list-group" >
+          <% @top_tracks.each_with_index do |track, index| %>
+          	<%= render partial: track, locals: {rank: index + 1, genre: @genre, :user_id => nil, :band_id => nil, :school_id => nil} %> 
+          <% end %>
+        </ul>
+      </div> 
+      </div>
+
+      
+      <div style="float:left;">
+      <% if @genre == nil %>
+  	<h6 style="margin-bottom: 0px;"><small>Top artists</small></h6> 
+  	<% else %>
+    <h6 style="margin-bottom: 0px;"><small>Top <b><%= @genre %></b> artists</small></h6> 
+    <% end %>
+      </div>
+      <div class="panel panel-default" style="float: right; width: 73.5%; min-width: 860px;;">
+      <% @top_bands.each_with_index do |band, index| %>
+        <%= render partial: band, locals: {rank: index+1} %>
+      <% end %>
+      </div>
+</div>
+</div>
+<%= render 'layouts/footer' %>
+<%= debug(params) if Rails.env.development? %>

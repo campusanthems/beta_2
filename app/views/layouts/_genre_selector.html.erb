@@ -1,0 +1,92 @@
+<% @genres = Track.all.collect(&:genre).uniq  %>
+
+<div class="container" style="margin-left:0px; width:100%; margin-top: -10px;">
+  <div class="scroller scroller-left"><i class="glyphicon glyphicon-chevron-left"></i></div>
+  <div class="scroller scroller-right"><i class="glyphicon glyphicon-chevron-right"></i></div>
+  <div class="wrapper">
+    <ul class="nav nav-tabs list" id="myTab">
+    	<% if @genre == nil %>
+    		<li class="active"><%= link_to "All", {:action => 'genre_select', :genre => nil, :school_id => school_id} %></li>
+    	<% else %>
+    		<li><%= link_to "All", {:action => 'genre_select', :genre => nil, :school_id => school_id} %></li>
+    	<% end %>
+
+    	<% @genres.each do | genre | %>
+    		<% if @genre == genre %>
+  			<li class="active"><a href="#"><%= genre %></a></li>
+  			<% else %>
+  			<li><%= link_to genre, {:action => 'genre_select', :genre => genre, :school_id => school_id} %></li>
+  			<% end %>
+  		<% end %>
+  </ul>
+  </div>
+</div>
+
+
+
+
+
+ <script type="text/javascript">
+ var hidWidth;
+var scrollBarWidths = 40;
+
+var widthOfList = function(){
+  var itemsWidth = 0;
+  $('.list li').each(function(){
+    var itemWidth = $(this).outerWidth();
+    itemsWidth+=itemWidth;
+  });
+  return itemsWidth;
+};
+
+var widthOfHidden = function(){
+  return (($('.wrapper').outerWidth())-widthOfList()-getLeftPosi())-scrollBarWidths;
+};
+
+var getLeftPosi = function(){
+  return $('.list').position().left;
+};
+
+var reAdjust = function(){
+  if (($('.wrapper').outerWidth()) < widthOfList()) {
+    $('.scroller-right').show();
+  }
+  else {
+    $('.scroller-right').hide();
+  }
+  
+  if (getLeftPosi()<0) {
+    $('.scroller-left').show();
+  }
+  else {
+    $('.item').animate({left:"-="+getLeftPosi()+"px"},'slow');
+  	$('.scroller-left').hide();
+  }
+}
+
+reAdjust();
+
+$(window).on('resize',function(e){  
+  	reAdjust();
+});
+
+$('.scroller-right').click(function() {
+  
+  $('.scroller-left').fadeIn('slow');
+  $('.scroller-right').fadeOut('slow');
+  
+  $('.list').animate({left:"+="+widthOfHidden()+"px"},'slow',function(){
+
+  });
+});
+
+$('.scroller-left').click(function() {
+  
+	$('.scroller-right').fadeIn('slow');
+	$('.scroller-left').fadeOut('slow');
+  
+  	$('.list').animate({left:"-="+getLeftPosi()+"px"},'slow',function(){
+  	
+  	});
+});    
+</script>
