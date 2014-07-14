@@ -1,5 +1,4 @@
-<%= render 'layouts/header', :header => @user.name.possessive << " Page" %> 
-<% provide(:background_color, @user.school.background_color) %>
+<%= render 'layouts/header', :header => @user.name.possessive << " Page", :banner_color => @user.school.banner_color %> 
 <button class="btn btn-primary btn-lg" style="float:right;" data-toggle="modal" data-target="#myModal1">
   Add a band
 </button>
